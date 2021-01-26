@@ -368,21 +368,7 @@ class ModelTrainer(object):
         edge = edge.unsqueeze(1)
         edge = torch.cat([edge, 1 - edge], 1)
         return edge
-    '''def graph_ct(self,edge_feat):
-        #edge_feat.size()= batch_size x 2 x num_samples x num_samples
-        judge_e=torch.ones_like(edge_feat)
-        for a in range(edge_feat.size(0)):
-            for b in range(edge_feat.size(2)):
-                for c in range(edge_feat.size(3)):
-                    if a==b==c==0:
-                       x=torch.tensor([[(a*edge_feat.size(2)+b),(a*edge_feat.size(2)+c)]])
-                    else: 
-                       if judge_e[a,0,b,c]==1:
-                          x=torch.cat((x,torch.tensor([[(a*edge_feat.size(2)+b),(a*edge_feat.size(2)+c)]])),0)
-        x=x.transpose(1,0)#后期修改注意正反
-        #print(x.size())
-        g=dgl.DGLGraph((x[0],x[1]))
-        return g'''
+
 
     def graph_ct(self,edge_feat):
         for a in range(edge_feat.size(0)):
@@ -398,17 +384,7 @@ class ModelTrainer(object):
         g=dgl.DGLGraph((gcx[0],gcx[1]))
         return g
 
-    '''def ef_ct(self,edge_feat):
-        #edge_feat.size()= batch_size x 2 x num_samples x num_samples
-        for a in range(edge_feat.size(0)):
-            for b in range(edge_feat.size(2)):
-                for c in range(edge_feat.size(3)):
-                    if a==b==c==0:
-                       edge_f=torch.tensor([[edge_feat[a,0,b,c],edge_feat[a,1,b,c]]])
-                    else:
-                       edge_f=torch.cat((edge_f,torch.tensor([[edge_feat[a,0,b,c],edge_feat[a,1,b,c]]])),0)
-        #print(edge_f.size())
-        return edge_f'''
+
 
     def ef_ct(self,edge_feat):
         for a in range(edge_feat.size(0)):
